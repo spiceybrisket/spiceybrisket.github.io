@@ -1,114 +1,84 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Adam Spice's Portfolio</title>
-  <!-- load jquery -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <!-- bootstrap javascript -->
-  <script src="js/bootstrap.min.js"></script>
-  <!-- load font awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-  <!-- bootstrap css -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <!-- custom css -->
-  <link rel="stylesheet" href="css/styles.css">
-  <!-- load google fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <title>Auckland City - Neighborhood Map Project</title>
+
+    <!-- Bootstrap 4 Alpha CSS(CDN) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+        crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/mapStyles.css">
 </head>
-<section class="flex-container">
-  <header class="row header-container">
-    <!-- display logo -->
-    <div class="col-6 logo">
-      <i class="fa fa-kiwi-bird fa-10x red-font"></i>
-      <!-- <img src="img/logo.png" id="logo" alt="A nice juicy kiwifruit"> -->
+
+<body>
+
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <main class="col p-0 navbar-inverse">
+                <a href class="float-right m-3 navbar-light" data-target="#sidebar" data-toggle="collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </a>
+                <div class="content bg-inverse">
+                    <!-- Map Content -->
+                    <div id="map">
+                        <!-- Map -->
+                        <p class="map_error"></p>
+                    </div>
+                </div>
+            </main>
+            <nav class="col-2 collapse bg-inverse pt-2 h-100 sidebar_width" id="sidebar">
+                <h4 class="app_title text-white">Neighborhood Map</h4>
+                <!-- Search Input -->
+                <input class="search" data-bind="textInput: searchOption, valueUpdate: 'afterkeydown'" placeholder="Search Locations...">
+                <hr class="sidebar_hr">
+                <ul class="nav flex-column" data-bind="foreach: myLocationsFilter">
+                    <a href="#">
+                        <li class="nav-item text-white location_list" data-bind="text: title, click: $parent.populateAndBounceMarker"></li>
+                    </a>
+                </ul>
+                <img class="foursquare" src="img/foursquare_attr.png" srcset="img/foursquare_attr@2x.png" alt="Powered By Foursquare!">
+            </nav>
+        </div>
     </div>
-    <!-- display page title-->
-    <div class="col-6 main-title">
-      <h1>Adam Spice</h1>
-      <h4>Kiwi Front-End Web Dev</h4>
-    </div>
-    <!-- open bootstrap nav -->
-    <nav class="row navbar navbar-default">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-navbar">
-          <span class="sr-only"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      <div class="collapse navbar-collapse" id="collapse-navbar">
-        <ul class="nav navbar-nav">
-          <li class="nav-item">
-            <a class="nav-item" href="#featured">Featured Work</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-item" href="#contact">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <!-- end nav -->
-  </header>
-  <!-- end header-->
-  <!-- start hero pitcure-->
-  <div class="row hero">
-    <img class="col-12 hero-img" src="img/kiwi_orhard_lrg.png" srcset="img/kiwi_orhard_sml.png 700w, img/kiwi_orhard_med.png 1000w, img/kiwi_orhard_lrg.png 1300w"
-      sizes="(max-width: 550px) 100vw, (max-width: 768px) 100vw" alt="Arial photo of some kiwifruit orchids">
-  </div>
-  <!-- end hero picture-->
-  <h2 class="row portfolio-title" id="featured">Featured Work</h2>
-  <section class="row portfolio">
-    <div class="col-6 sample-project project1">
-      <a href="http://www.github.com">
-        <img class="sample-project-img" src="img/cape_lrg.png" srcset="img/cape_sml.png 700w, img/cape_med.png 1000w, img/cape_lrg.png 1300w"
-          sizes="(max-width: 550px) 100vw, (max-width: 768px) 100vw" alt="The Cape Reings lighthouse at sunset">
-      </a>
-      <h3 class="white">Project One</h3>
-      <p>Sample Project For Udacity Front-end Web development Nanodegree.</p>
-      <a class="white" href="http://www.github.com">www.github.com</a>
-    </div>
-    <div class="col-6 sample-project project2">
-      <a href="http://www.github.com">
-        <img class="sample-project-img" src="img/book_lrg.png" srcset="img/book_sml.png 700w, img/book_med.png 1000w, img/book_lrg.png 1300w"
-          sizes="(max-width: 550px) 100vw, (max-width: 768px) 100vw" alt="A book with some corn draped over it">
-      </a>
-      <h3>Project Two</h3>
-      <p>Sample Project For Udacity Front-end Web development Nanodegree.</p>
-      <a href="http://www.github.com">www.github.com</a>
-    </div>
-    <div class="col-6 sample-project project3">
-      <a href="http://www.github.com">
-        <img class="sample-project-img" src="img/street_lrg.png" srcset="img/street_sml.png 700w, img/street_med.png 1000w, img/street_lrg.png 1300w"
-          sizes="(max-width: 550px) 100vw, (max-width: 768px) 100vw" alt="photo of a minimalist work space with beige chair white desk and stark accessories">
-      </a>
-      <h3 class="red">Project Three</h3>
-      <p>Sample Project For Udacity Front-end Web development Nanodegree.</p>
-      <a href="http://www.github.com">www.github.com</a>
-    </div>
-  </section>
-  <footer class="row col-12" id="contact">
-      <ul>
-        <li>
-          <a class="white" href="https://github.com/spiceybrisket" target="blank">
-            <i class="fab fa-github-square fa-2x"></i>
-          </a>
-        </li>
-        <li>
-          <a class="white" href="https://twitter.com/spiceybrisket" target="blank">
-            <i class="fab fa-twitter fa-2x"></i>
-          </a>
-        </li>
-        <li>
-          <a class="white" href="mailto:adamdidthis@hotmail.com" target="blank">
-            <i class="fa fa-envelope fa-2x"></i>
-          </a>
-        </li>
-      </ul>
-    </footer>
-</section>
+
+    <script src="js/knockout-3.4.2.js" charset="utf-8">
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous">
+    </script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous">
+    </script>
+
+    <script src="js/markers.js" charset="utf-8">
+    </script>
+
+    <script src="js/styles.js" charset="utf-8">
+    </script>
+
+    <script src="js/app.js" charset="utf-8">
+    </script>
+
+    <script src="js/manipulation.js" charset="utf-8">
+    </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyC-Mg9AYrMefMkKeIYog3pQaLpS6xauAzw&callback=startApp"
+        onerror="googleError()">
+    </script>
+</body>
 
 </html>
